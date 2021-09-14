@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -117,5 +118,21 @@ public class SitterBoardController {
 		rttr.addAttribute("keyword", scri.getKeyword());
 
 		return "redirect:/sitter/profileBoard"; // 메인페이지
+	}
+	
+	// sitter 예약신청
+	@RequestMapping(value="/sittReserve", method = RequestMethod.GET)
+	public String sittReserve(SitterBoardVO sbvo) {
+		log.info("sittReserve GET");
+		System.out.println("email : "+sbvo.getSitter_email());
+		return "/sitter/sitt_reserv_popup";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/sittReserverq", method = RequestMethod.POST)
+	public String reqReserve(SitterBoardVO sbvo) {
+		log.info("reqReserve GET");
+		
+		return "/sitter/sitt_profile_detail?sitter_email="+sbvo.getSitter_email();
 	}
 }

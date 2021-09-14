@@ -7,8 +7,18 @@
 <head>
 <script type="text/javascript">
 function openWin(){
-window.name="profileDetail";
-	openWin=window.open('/sitter/profileImageEV?sitter_email=${profileEdit.sitter_email}','_blank','width=100px,height=50px;');
+	window.name="profileDetail";
+	var url="/sitter/profileImageEV?sitter_email=${profileEdit.sitter_email}";
+	var name="profileImage";
+	var option="_blank,width=100,height=50";
+	window.open(url,name,option)
+	/* openWin=window.open('/sitter/profileImageEV?sitter_email=${profileEdit.sitter_email}','_blank','width=100px,height=50px;'); */
+}
+function click_add(){
+	var url="/sitter/sittReserve?sitter_email=${profileEdit.sitter_email}";
+	var name="schedulePopup";
+	var option="width=600, height=400, left=100, top=50";
+	window.open(url,name,option)
 }
 </script>
 <meta charset="UTF-8">
@@ -23,7 +33,9 @@ window.name="profileDetail";
 <div>
 <label for="sitter_image">프로필 이미지</label>
 <img src="/upload/sitter_profile/${profileView.sitter_image}"/><br>
+<c:if test="${profileView.sitter_email eq sessionScope.sitter}">
 <button type="button" onclick="openWin()">이미지수정</button>
+</c:if>
 </div>
 <div>
 <label for="sitter_name">이름</label>
@@ -62,10 +74,12 @@ window.name="profileDetail";
 <input type="text" id="rate" name="rate" value="${profileView.rate}" readonly/>
 </div>
 <div>
+<c:if test="${profileView.sitter_email eq sessionScope.sitter}">
 	<button type="submit">정보수정</button>
-<c:if test="${sessionScope.id != null}">
 </c:if>
-<button type="button">메세지 보내기</button>
+<c:if test="${profileView.sitter_email != sessionScope.sitter}">
+<button type="button" onclick="click_add()">예약 신청</button>
+</c:if>
 	<button type="button" onclick="location.href='/sitter/profileBoard'">목록</button>
 </div> 
 </form>

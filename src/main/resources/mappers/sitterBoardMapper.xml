@@ -36,6 +36,7 @@ UPDATE SITTERBOARD SET SITTER_IMAGE=#{sitter_image}
 WHERE SITTER_EMAIL=SUBSTR(#{sitter_image},0,INSTR(#{sitter_image},'.',-1,1)-1)
 </update>
 
+
 <sql id="search">
 <if test="searchType != null">
 <if test="searchType=='a'.toString()">WHERE SITTER_ADDR LIKE '%'||#{keyword}||'%'</if>
