@@ -41,7 +41,7 @@
 		//댓글작성
 		$(".replyWriteBtn").on("click",function(){
 			var formObj = $("form[name='replyForm']");
-			formObj.attr("action", "/qna/replyQnaWrite");
+			formObj.attr("action", "/qna/qnaReplyWrite");
 			formObj.submit();
 			});
 		//댓글 수정 view
@@ -137,6 +137,12 @@
 			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 			
+			<div class="form-group">
+				<label for="sitter_image" class="col-sm-2 control-label">이미지</label>
+				<div class="col-sm-10">
+					<input type="text" id="sitter_image" name="sitter_image" class="form-control"/>
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="sitter_email" class="col-sm-2 control-label">댓글 작성자</label>
 				<div class="col-sm-10">

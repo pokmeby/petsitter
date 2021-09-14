@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>qna 수정</title>
 </head>

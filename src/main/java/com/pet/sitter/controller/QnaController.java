@@ -137,7 +137,7 @@ public class QnaController {
 		logger.info("qna reply Write");
 
 		qnaReplyService.writeQnaReply(vo);
-
+		logger.info("qna reply Writedddddd");
 		rttr.addAttribute("qno", vo.getQno());
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum() );
