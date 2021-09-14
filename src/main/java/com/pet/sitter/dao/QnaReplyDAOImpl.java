@@ -28,7 +28,9 @@ public class QnaReplyDAOImpl implements QnaReplyDAO{
 	//qna 답변 작성
 	@Override
 	public void writeQnaReply(QnaReplyVO vo) throws Exception {
+		System.out.println("여기 지나가니?" + vo);
 		sql.insert("qnaReplyMapper.writeQnaReply", vo);
+		System.out.println("여기 지나가니?");
 	}
 
 	//qna 답변 수정

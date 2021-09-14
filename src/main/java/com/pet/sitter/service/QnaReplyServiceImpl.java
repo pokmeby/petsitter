@@ -24,6 +24,7 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	//qna 답변 작성
 	@Override
 	public void writeQnaReply(QnaReplyVO vo) throws Exception {
+		System.out.println("vo출력" + vo);
 		dao.writeQnaReply(vo);
 	}
 

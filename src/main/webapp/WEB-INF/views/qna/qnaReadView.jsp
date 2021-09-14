@@ -83,24 +83,24 @@
 			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 		</form>
 		
-		<div class="form-group">
-			<label for="qna_title" class="col-sm-2 control-label">제목</label>
-			<input type="text" id="qna_title" name="qna_title" class="form-control" value="${read.qna_title}" readonly="readonly"/>
+		<div>
+			<label for="qna_title">제목</label>
+			<input type="text" id="qna_title" name="qna_title"  value="${read.qna_title}" readonly="readonly"/>
+		</div>
+		<div>
+			<label for="qna_category" >내용</label>
+			<textarea id="qna_category" name="qna_category" readonly="readonly"><c:out value="${read.qna_content}"/></textarea>
 		</div>
 		<div class="form-group">
-			<label for="qna_category" class="col-sm-2 control-label">내용</label>
-			<textarea id="qna_category" name="qna_category" class="form-control" readonly="readonly"><c:out value="${read.qna_content}"/></textarea>
+			<label for="qna_content">내용</label>
+			<textarea id="qna_content" name="qna_content" readonly="readonly"><c:out value="${read.qna_content}"/></textarea>
 		</div>
 		<div class="form-group">
-			<label for="qna_content" class="col-sm-2 control-label">내용</label>
-			<textarea id="qna_content" name="qna_content" class="form-control" readonly="readonly"><c:out value="${read.qna_content}"/></textarea>
-		</div>
-		<div class="form-group">
-			<label for="user_email" class="col-sm-2 control-label">작성자</label>
+			<label for="user_email">작성자</label>
 			<input type="text" id="user_email" name="user_email" class="form-control" value="${read.user_email}" readonly="readonly" />
 		</div>
 		<div class="form-group">
-			<label for="qna_date" class="col-sm-2 control-label">작성날짜</label>
+			<label for="qna_date">작성날짜</label>
 			<fmt:formatDate value="${read.qna_date}" pattern="yyyy-MM-dd"/>
 		</div>
 		
@@ -130,36 +130,36 @@
 			</ol>
 		</div>
 		
-		<form name="replyForm" method="post" class="form-horizontal">
+		<form name="replyForm" method="post">
 			<input type="hidden" id="qno" name="qno" value="${read.qno}"/>
 			<input type="hidden" id="page" name="page" value="${scri.page}">
 			<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
 			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 			
-			<div class="form-group">
-				<label for="sitter_image" class="col-sm-2 control-label">이미지</label>
-				<div class="col-sm-10">
-					<input type="text" id="sitter_image" name="sitter_image" class="form-control"/>
+			<div>
+				<label for="sitter_image">이미지</label>
+				<div>
+					<input type="text" id="sitter_image" name="sitter_image"/>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="sitter_email" class="col-sm-2 control-label">댓글 작성자</label>
-				<div class="col-sm-10">
-					<input type="text" id="sitter_email" name="sitter_email" class="form-control"/>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="qna_reply_content" class="col-sm-2 control-label">댓글 내용</label>
-				<div class="col-sm-10">
-					<input type="text" id="qna_reply_content" name="qna_reply_content" class="form-control" />
+			<div>
+				<label for="sitter_email">댓글 작성자</label>
+				<div>
+					<input type="text" id="sitter_email" name="sitter_email"/>
 				</div>
 			</div>
 			
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="button" class="replyWriteBtn btn btn-success">작성</button>
+			<div>
+				<label for="qna_reply_content">댓글 내용</label>
+				<div>
+					<input type="text" id="qna_reply_content" name="qna_reply_content" />
+				</div>
+			</div>
+			
+			<div>
+				<div>
+					<button type="button" class="replyWriteBtn">작성</button>
 				</div>
 			</div>
 		</form>

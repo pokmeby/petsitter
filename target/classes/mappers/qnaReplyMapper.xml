@@ -13,7 +13,7 @@
     	<!--  댓글 작성 -->
     	<insert id="writeQnaReply">
     		INSERT INTO qnaReply(qno, qna_rno, qna_reply_content, sitter_image, sitter_email)
-    					VALUES(#{qno}, SEQ_qnaReply_rno.nextval, #{qna_reply_content}, #{sitter_image},
+    					VALUES(#{qno}, SEQ_QNAREPLY_RNO.nextval, #{qna_reply_content}, #{sitter_image},
     							#{sitter_email})
     	</insert>
 		
