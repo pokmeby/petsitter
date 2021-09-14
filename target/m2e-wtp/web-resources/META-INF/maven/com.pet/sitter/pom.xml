@@ -25,7 +25,7 @@
 	<dependencies>
 	
 	<!-- web socket -->
-        <dependency>
+<!--         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
             <version>${org.springframework-version}</version>
@@ -35,8 +35,22 @@
             <artifactId>javax.websocket-api</artifactId>
             <version>1.1</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency> -->
 	
+	   <!-- jackson 추가--> 
+   <dependency> 
+   <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+     <version>2.9.2</version>
+      </dependency>
+      
+      <!-- jackson-core 추가--> 
+      <dependency>
+       <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+         <version>2.9.2</version>
+          </dependency>
+          
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -158,6 +172,12 @@
     		<version>5.2.9.RELEASE</version> <!-- ${opg.springframework-version} 으로도 사용가능. -->
 		</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+<dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.8</version>
+</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
