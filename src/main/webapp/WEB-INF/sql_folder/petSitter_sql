@@ -38,6 +38,8 @@ CREATE SEQUENCE SEQ_qna_qno INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_reviewBoard_rno INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_userBoard_board_bno INCREMENT BY 1 START WITH 1;
 
+create sequence SEQ_qnaReply_rno INCREMENT BY 1 START WITH 1;
+
 
 
 /* Create Tables */
@@ -69,17 +71,30 @@ CREATE TABLE petInfo
 
 CREATE TABLE qna
 (
-	qa_title varchar2(100),
-	qa_content varchar2(3000),
-	qa_date date,
 	a_image varchar2(100),
 	a_content varchar2(3000),
-	q_category varchar2(50),
-	qno number NOT NULL,
-	user_email varchar2(30) NOT NULL,
 	sitter_email varchar2(30) NOT NULL,
-	PRIMARY KEY (qno)
 );
+
+create table qna (
+	qno number NOT NULL,
+	qna_title varchar2(100),
+	qna_category varchar2(50),
+	qna_content varchar2(3000),
+	user_email varchar2(30) NOT NULL,
+	qna_date date default sysdate,
+	PRIMARY KEY (qno));
+	
+
+create table qnaReply (
+	qno number NOT NULL,
+	qna_rno number NOT NULL, 
+	qna_reply_content varchar2(3000) NOT NULL,
+	sitter_image varchar2(100),
+	sitter_email varchar2(30) NOT NULL,
+	qna_reply_date date default sysdate,
+	primary key(qno, qna_rno));
+	
 
 
 CREATE TABLE reviewBoard
@@ -151,13 +166,6 @@ ALTER TABLE message
 	REFERENCES sitterMember (sitter_email)
 ;
 
-
-ALTER TABLE qna
-	ADD FOREIGN KEY (sitter_email)
-	REFERENCES sitterMember (sitter_email)
-;
-
-
 ALTER TABLE reviewBoard
 	ADD FOREIGN KEY (sitter_email)
 	REFERENCES sitterMember (sitter_email)
@@ -186,6 +194,14 @@ ALTER TABLE qna
 	ADD FOREIGN KEY (user_email)
 	REFERENCES UserMember (user_email)
 ;
+
+alter table qnaReply
+add FOREIGN KEY (sitter_email)
+	REFERENCES sitterMember (sitter_email)
+;
+
+ALTER TABLE qnaReply add constraint qnaReply_qna_rno foreign key(qno)
+references qna(qno);
 
 
 ALTER TABLE reviewBoard
