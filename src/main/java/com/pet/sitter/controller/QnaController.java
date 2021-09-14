@@ -83,8 +83,8 @@ public class QnaController {
 		model.addAttribute("read", qnaService.qnaRead(qnaVO.getQno()));
 		model.addAttribute("scri", scri);
 
-		List<QnaReplyVO> qnaReplyList = qnaReplyService.readQnaReply(qnaVO.getQno());
-		model.addAttribute("qnaReplyList", qnaReplyList);
+		List<QnaReplyVO> ReplyList = qnaReplyService.readQnaReply(qnaVO.getQno());
+		model.addAttribute("ReplyList", ReplyList);
 
 		return "qna/qnaReadView";
 	}
