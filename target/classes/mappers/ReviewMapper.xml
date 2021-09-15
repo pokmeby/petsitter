@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ReviewMapper">
+
+	<insert id="insert">
+	insert into reviewBoard(r_rate, r_title, ruse_date, rno, r_content,  user_email ,sitter_email, r_image)
+	values (#{r_rate}, #{r_title}, #{ruse_date}, SEQ_reviewBoard_rno.nextval, #{r_content}, #{user_email} ,#{sitter_email},  #{r_image})
+	</insert>
+	
+	<select id="listPage" resultType="com.pet.sitter.vo.ReviewVO" parameterType="com.pet.sitter.vo.SearchCriteria">
+	select r_rate, r_title, rwrite_date, ruse_date, rno, r_content, user_email, r_image from
+		(select r_rate, r_title, rwrite_date, ruse_date, rno, r_content, user_email , r_image, row_number()
+			over(order by rno desc) as rnum from reviewBoard where 1 = 1
+			<include refid="search"></include>
+			 ) mp where rnum between #{rowStart} and #{rowEnd} order by rno desc
+	</select>
+	
+	<select id="listCount" parameterType="com.pet.sitter.vo.SearchCriteria" resultType="int">
+		select count(rno) from reviewBoard where 1 = 1
+		<include refid="search"></include>
+		 and rno > 0
+	</select>
+	
+	<select id="read" parameterType="int" resultType="com.pet.sitter.vo.ReviewVO">
+		select r_rate, r_title, ruse_date, rno, r_content, user_email, sitter_email, r_image from reviewBoard where rno = #{rno}
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">and r_title like '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">and r_content like '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'u'.toString()">and user_email like '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tcu'.toString()">and (r_title like '%' || #{keyword} || '%') or ( r_content like '%' || #{keyword} || '%') or (user_email like '%' || #{keyword} || '%' )</if>
+		</if>
+	</sql>
+	
+	<update id="update" parameterType="com.pet.sitter.vo.ReviewVO">
+		update reviewBoard
+		set	r_rate = #{r_rate},
+			r_title = #{r_title},
+			ruse_date = #{ruse_date},
+			r_content = #{r_content}, 
+			user_email = #{user_email},
+			sitter_email = #{sitter_email}
+			 where rno = #{rno}
+	</update>
+	
+	<update id="imageUpdate" parameterType="com.pet.sitter.vo.ReviewVO">
+		update reviewBoard
+		set r_image = #{r_image}
+		where rno = #{rno}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from reviewBoard where rno = #{rno}
+	</delete>
+</mapper> 

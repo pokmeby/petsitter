@@ -26,6 +26,7 @@ DROP TABLE UserMember CASCADE CONSTRAINTS;
 DROP SEQUENCE SEQ_message_mno;
 DROP SEQUENCE SEQ_qna_qno;
 DROP SEQUENCE SEQ_reviewBoard_rno;
+DROP SEQUENCE SEQ_replyReview_reno;
 DROP SEQUENCE SEQ_userBoard_board_bno;
 
 
@@ -101,8 +102,8 @@ CREATE TABLE reviewBoard
 (
 	r_rate number,
 	r_title varchar2(30),
-	rwrite_date date,
-	ruse_date date,
+	rwrite_date date default sysdate,
+	ruse_date varchar2(50),
 	rno number NOT NULL,
 	r_content varchar2(3000),
 	user_email varchar2(30) NOT NULL,
@@ -118,7 +119,8 @@ CREATE TABLE sitterBoard
 	sitter_avail date,
 	sitter_price number,
 	sitter_image varchar2(50),
-	sitter_email varchar2(30) NOT NULL
+	sitter_email varchar2(30) NOT NULL,
+	sitter_addr varchar2(50)
 );
 
 

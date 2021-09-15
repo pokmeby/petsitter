@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="sitterBoardMapper">
+<select id="sbList" resultType="com.pet.sitter.vo.SitterBoardVO" parameterType="com.pet.sitter.vo.SearchCriteria">
+SELECT * FROM 
+(SELECT SITTER_EMAIL,SITTER_IMAGE, SITTER_AVAIL, SITTER_PRICE, SITTER_ADDR, SITTER_NAME, SITTER_GENDER,
+ROW_NUMBER() OVER(ORDER BY sitter_email) AS RNUM
+FROM (SELECT * FROM SITTERBOARD NATURAL JOIN SITTERMEMBER <include refid="search"></include> ))
+WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} 
+</select>
+
+<select id="profileView" resultType="com.pet.sitter.vo.SitterBoardVO">
+SELECT * FROM 
+SITTERBOARD NATURAL JOIN SITTERMEMBER,(select avg(nvl(r_rate,0)) AS rate from reviewBoard where sitter_email=#{sitter_email}) 
+WHERE SITTER_EMAIL = #{sitter_email}
+</select>
+
+<select id="listCount" resultType="int" parameterType="com.pet.sitter.vo.SearchCriteria">
+SELECT COUNT(SITTER_EMAIL) FROM SITTERBOARD NATURAL JOIN SITTERMEMBER <include refid="search"></include>
+</select>
+
+<update id="editBoard">
+UPDATE SITTERBOARD SET SITTER_ADDR=#{sitter_addr},
+SITTER_AVAIL=#{sitter_avail}, SITTER_PRICE=#{sitter_price}, SITTER_EXP=#{sitter_exp}, SITTER_INTRO=#{sitter_intro}
+WHERE SITTER_EMAIL=#{sitter_email}
+</update>
+
+<update id="editMember">
+UPDATE SITTERMEMBER SET SITTER_NAME=#{sitter_name}, SITTER_GENDER=#{sitter_gender}
+WHERE SITTER_EMAIL=#{sitter_email}
+</update>
+
+<update id="editImage">
+UPDATE SITTERBOARD SET SITTER_IMAGE=#{sitter_image}
+WHERE SITTER_EMAIL=SUBSTR(#{sitter_image},0,INSTR(#{sitter_image},'.',-1,1)-1)
+</update>
+
+
+<sql id="search">
+<if test="searchType != null">
+<if test="searchType=='a'.toString()">WHERE SITTER_ADDR LIKE '%'||#{keyword}||'%'</if>
+<if test="searchType=='pu'.toString()">WHERE SITTER_PRICE <![CDATA[ >= ]]> #{keyword} </if>
+<if test="searchType=='pd'.toString()">WHERE SITTER_PRICE <![CDATA[ <= ]]> #{keyword} </if>
+<if test="searchType=='n'.toString()">WHERE upper(SITTER_NAME) LIKE upper('%'||#{keyword}||'%') </if>
+<!-- <if test="searchType=='w'.toString()">AND WRITER LIKE '%'||#{keyword}||'%'</if>
+<if test="searchType=='tc'.toString()">AND (TITLE LIKE '%'||#{keyword}||'%') or (CONTENT LIKE '%'||#{keyword}||'%')</if> -->
+</if></sql>
+
+</mapper>
