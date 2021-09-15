@@ -37,7 +37,7 @@
 <body>
 <div id="root">
 	<header>
-		<h1> 게시판 글쓰기</h1>
+		<h1> Q & A 등록하기 </h1>
 	</header>
 	<hr />
 	

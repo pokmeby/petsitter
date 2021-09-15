@@ -190,18 +190,18 @@ ALTER TABLE petInfo
 ;
 
 
-ALTER TABLE qna
+ALTER TABLE qna 
 	ADD FOREIGN KEY (user_email)
-	REFERENCES UserMember (user_email)
+	REFERENCES UserMember (user_email) on delete cascade
 ;
 
 alter table qnaReply
 add FOREIGN KEY (sitter_email)
-	REFERENCES sitterMember (sitter_email)
+	REFERENCES sitterMember (sitter_email) on delete cascade
 ;
 
-ALTER TABLE qnaReply add constraint qnaReply_qna_rno foreign key(qno)
-references qna(qno);
+ALTER TABLE qnaReply add constraint QNAREPLY_QNO foreign key(qno)
+references qna(qno) on delete cascade;
 
 
 ALTER TABLE reviewBoard
@@ -217,5 +217,7 @@ ALTER TABLE userBoard
 
 
 
+-- 제약조건 삭제
+ALTER TABLE '테이블명' DROP CONSTRAINT '제약조건명';
 
 

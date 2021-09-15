@@ -21,37 +21,64 @@
 <div class="container">
 		<section id="container">
 			<form role="form" method="get">
-				<table class="table table-hover">
+			
 				
 				
-				<div class="col-xs-10 col-sm-10">
-						<div class="input-group">
-							<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" class="form-control"/>
-							<span class="input-group-btn">
-								<button id="searchBtn" type="button" class="btn btn-default">검색</button>
+				<div>
+					
+							<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+							<span>
+								<button id="searchBtn" type="button"><img src="../resources/img/common/loupe.png"></button>
 							</span>
 						</div>
-					</div>
-					<thead>
-						<tr><th>번호</th><th>제목</th><th>카테고리</th><th>작성자</th><th>등록일</th></tr>
-					</thead>
 					
+								
 					<c:forEach items="${list}" var="list">
-						<tr>
-							<td><c:out value="${list.qno}"/></td>
-							<td>
-								<a href="/qna/qnaReadView?qno=${list.qno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}">
-								<c:out value="${list.qna_title}"/></a>
-							</td>
-							<td><c:out value="${list.qna_category}"/></td>
-							<td><c:out value="${list.user_email}"/></td>
-							<td><fmt:formatDate value="${list.qna_date}" pattern="yyyy-MM-dd"/></td>
-						</tr>
+					<div>
+					<p>
+							<%-- <td><c:out value="${list.qno}"/></td> --%>
+							Q. <a href="/qna/qnaReadView?qno=${list.qno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}">
+								<c:out value="${list.qna_title}" />
+							</a> <c:out value="${list.user_email}" />  
+							<fmt:formatDate value="${list.qna_date}" pattern="yyyy-MM-dd" /> <p>
+							<c:out value="${list.qna_content}"/>
+							<%-- <td><c:out value="${list.qna_category}"/></td> --%>
+							
+						
+							
+						</div>
+						
 					</c:forEach>
-				</table>
-				 <div class="search row">
-					<div class="col-xs-2 col-sm-2">
-						<select name="searchType" class="form-control">
+		
+				
+				<div id="reply">
+			<ol class="replyList">
+				<c:forEach items="${replyList}" var="replyList">
+					<li>
+						<p>
+						작성자 : ${replyList.sitter_email}<br />
+						작성 날짜 : <fmt:formatDate value="${replyList.qna_reply_date}" pattern="yyyy-MM-dd"/>
+						</p>
+						
+						<p>${replyList.qna_reply_content}</p>
+						<div>
+							<button type="button" class="replyUpdateBtn btn btn-warning" data-qna_rno="${replyList.qna_rno}">수정</button>
+							<button type="button" class="replyDeleteBtn btn btn-danger" data-qna_rno="${replyList.qna_rno}">삭제</button>
+						</div>
+					</li>
+				</c:forEach>
+			</ol>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				 <div>
+					<div>
+						<select name="searchType">
 							<option value="n" <c:out value="${srci.searchType == null ? 'selected' : '' }"/>>-----</option>
 							<option value="t" <c:out value="${srci.searchType eq 't' ? 'selected' : '' }"/>>제목</option>
 							<option value="ca" <c:out value="${srci.searchType eq 'ca' ? 'selected' : '' }"/>>카테고리</option>

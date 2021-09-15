@@ -84,25 +84,31 @@
 		</form>
 		
 		<div>
-			<label for="qna_title">제목</label>
-			<input type="text" id="qna_title" name="qna_title"  value="${read.qna_title}" readonly="readonly"/>
-		</div>
-		<div>
-			<label for="qna_category" >내용</label>
-			<textarea id="qna_category" name="qna_category" readonly="readonly"><c:out value="${read.qna_content}"/></textarea>
-		</div>
-		<div class="form-group">
-			<label for="qna_content">내용</label>
-			<textarea id="qna_content" name="qna_content" readonly="readonly"><c:out value="${read.qna_content}"/></textarea>
-		</div>
-		<div class="form-group">
-			<label for="user_email">작성자</label>
-			<input type="text" id="user_email" name="user_email" class="form-control" value="${read.user_email}" readonly="readonly" />
-		</div>
-		<div class="form-group">
-			<label for="qna_date">작성날짜</label>
+		<p>
+			<!-- <label for="qna_title">제목</label> -->
+			Q. <c:out value="${read.qna_title}" />
+			<%-- <input type="text" id="qna_title" name="qna_title"  value="${read.qna_title}" readonly="readonly"/> --%>
+		
+			<!-- <label for="user_email">작성자</label>  -->
+			<c:out value="${read.user_email}"/>
+			<%-- <input type="text" id="user_email" name="user_email" class="form-control" value="${read.user_email}" readonly="readonly" /> --%>
+		
+			<!-- <label for="qna_date">작성날짜</label> -->
 			<fmt:formatDate value="${read.qna_date}" pattern="yyyy-MM-dd"/>
+		<br />
+		<p>
+			<label for="qna_category" >카테고리</label>
+			<c:out value="${read.qna_category}"/>
+			<%-- <textarea id="qna_category" name="qna_category" readonly="readonly"><c:out value="${read.qna_content}"/></textarea> --%>
+		<p>
+		<hr/>
+		<p>
+			<!-- <label for="qna_content">내용</label> -->
+			<c:out value="${read.qna_content}"/>
+			<%-- <textarea id="qna_content" name="qna_content" readonly="readonly"><c:out value="${read.qna_content}"/></textarea> --%>
+		<p>
 		</div>
+		
 		
 		<div>
 			<button type="button" class="update_btn">수정</button>
@@ -112,22 +118,24 @@
 		<hr/>
 		<!-- 댓글 -->
 		<div id="reply">
-			<ol class="replyList">
+			
 				<c:forEach items="${replyList}" var="replyList">
-					<li>
+			
 						<p>
-						작성자 : ${replyList.sitter_email}<br />
-						작성 날짜 : <fmt:formatDate value="${replyList.qna_reply_date}" pattern="yyyy-MM-dd"/>
+						
+						<img src="../resources/img/common/loupe.png"/> ${replyList.sitter_email} 님의 답변 
+						<fmt:formatDate value="${replyList.qna_reply_date}" pattern="yyyy-MM-dd"/>
 						</p>
+						<hr/>
 						
 						<p>${replyList.qna_reply_content}</p>
 						<div>
 							<button type="button" class="replyUpdateBtn btn btn-warning" data-qna_rno="${replyList.qna_rno}">수정</button>
 							<button type="button" class="replyDeleteBtn btn btn-danger" data-qna_rno="${replyList.qna_rno}">삭제</button>
 						</div>
-					</li>
+				
 				</c:forEach>
-			</ol>
+			
 		</div>
 		<hr/>
 		<form name="replyForm" method="post">

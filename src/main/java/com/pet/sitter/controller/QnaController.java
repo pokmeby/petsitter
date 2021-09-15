@@ -163,7 +163,7 @@ public class QnaController {
 	@RequestMapping(value="/qnaReplyUpdate", method = RequestMethod.POST)
 	public String qnaReplyUpdate(QnaReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("qna reply update post");
-		System.out.println(vo);
+
 		qnaReplyService.updateReply(vo);
 		System.out.println(vo);
 
