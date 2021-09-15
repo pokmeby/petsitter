@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+  
+<mapper namespace="petInfoMapper"> 
+
+
+<insert id="infoWrite">
+insert into PETINFO(
+                     pet_type,
+                     pet_age,
+                     pet_gender,
+                     pet_detail,
+                     pet_name,
+                     pet_image,
+                     user_email
+)
+values(
+          #{pet_type},
+          #{pet_age},
+          #{pet_gender},
+          #{pet_detail},
+          #{pet_name},
+          #{pet_image},
+          #{user_email}
+)
+</insert>
+
+
+<update id="infoUpdate">
+update PETINFO set 
+pet_type = #{pet_type},
+pet_age = #{pet_age},
+pet_gender = #{pet_gender},
+pet_detail = #{pet_detail},
+pet_name = #{pet_name},
+pet_image = #{pet_image}
+where user_email = #{user_email}
+</update>
+
+
+<delete id="infoDelete">
+delete from PETINFO where user_email = #{user_email}
+</delete>
+
+
+<select id="infoRead" parameterType="String" resultType="com.pet.sitter.vo.PetInfoVO">
+select 
+pet_type,
+pet_age,
+pet_gender,
+pet_detail,
+pet_name,
+pet_image,
+user_email from PETINFO where user_email = #{user_email}
+</select>
+
+
+</mapper> 
+  
+  
+  
+    

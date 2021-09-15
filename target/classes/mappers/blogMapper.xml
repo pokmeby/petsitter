@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="blogMapper">
+    <insert id="insert">
+    	insert into blog ( blog_bno,  blog_title, blog_content,  blog_email, blog_date, blog_image)
+    	values ( seq_blog_bno.nextval, #{blog_title}, #{blog_content}, #{blog_email}, sysdate, #{blog_image})
+    </insert>
+    
+    <select id="listPage" resultType="com.pet.sitter.vo.BlogVO" parameterType="com.pet.sitter.vo.SearchCriteria">
+    select blog_bno, blog_content, blog_image, blog_title, blog_email, blog_date
+     from ( select blog_bno,
+     blog_content,
+     blog_image, 
+     blog_title, 
+     blog_email, 
+     blog_date, 
+     row_number() 
+    over (order by blog_bno desc) as rnum from blog where 1 = 1 
+  <!--   <include refid="search"></include> -->
+    			) MP where rnum between #{rowStart} and #{rowEnd} 
+    			order by blog_bno desc 
+    </select>
+    
+    
+        <!--  https://wakestand.tistory.com/243 -->
+    <select id="listCount" parameterType="com.pet.sitter.vo.SearchCriteria" resultType="int">
+    select count(blog_bno)
+    from blog
+    where 1 = 1
+    <include refid="search"></include>
+    and blog_bno > 0 
+    </select>
+    
+<!--  refid(reference id) 는 반복되는 쿼리를 미리 작성해 놓고 재활용 할수 있게 해준다. -->
+    <sql id="search">
+    <if test="searchType != null">
+    <if test="searchType == 't'.toString()">AND blog_TITLE LIKE '%' || #{keyword} || '%'</if>
+    <if test="searchType == 'c'.toString()">AND blog_Content LIKE '%' || #{keyword} || '%'</if>
+    </if>
+    </sql>
+    
+    <select id="read" parameterType="int" resultType="com.pet.sitter.vo.BlogVO">
+    select blog_bno, blog_title, blog_image, blog_content, blog_email, blog_date from blog where blog_bno = #{blog_bno} 
+    </select>
+    
+    <update id="update" parameterType="com.pet.sitter.vo.BlogVO">
+    	update blog
+    	set blog_title = #{blog_title},
+    	blog_content = #{blog_content}
+    	where blog_bno = #{blog_bno}
+    </update>
+    
+    <delete id="delete" parameterType="int">
+    	delete from blog where blog_bno = #{blog_bno}
+    </delete>
+    
+     <select id="likeRead" parameterType="com.pet.sitter.vo.BlogLikeVO" resultType="int">
+    select likeblog_status from bloglike where likeblog_bno = #{likeblog_bno} and likeblog_email = #{likeblog_email} 
+    </select>
+    
+        <insert id="likeAdd">
+    	insert into blogLike ( likeblog_bno, likeblog_email, likeblog_status)
+    	values ( #{likeblog_bno}, #{likeblog_email}, #{likeblog_status})
+    </insert>
+    
+    <delete id="likeDelete">
+    Delete from blogLike where likeblog_bno = #{likeblog_bno} and likeblog_email = #{likeblog_email}
+    </delete>
+    </mapper>

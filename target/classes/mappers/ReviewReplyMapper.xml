@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ReviewReplyMapper">
+
+	<select id="readReply" resultType="com.pet.sitter.vo.ReviewReplyVO">
+		select user_email, re_write_date, re_star, re_content, re_num from replyReview where rno = #{rno}
+	</select>
+	
+	<insert id="writeReply">
+		insert into replyReview(
+		user_email, re_star, re_content, re_num, rno) values (#{user_email}, #{re_star}, #{re_content}, SEQ_replyReview_reno.nextval, #{rno})
+	</insert>
+
+	<update id="updateReply" parameterType="com.pet.sitter.vo.ReviewReplyVO">
+		update replyReview set re_content = #{re_content} where re_num = #{re_num}
+	</update>
+
+	<delete id="deleteReply" parameterType="int">
+		delete from replyReview where re_num = #{re_num}
+	</delete>
+	
+	<select id="selectReply" resultType="com.pet.sitter.vo.ReviewReplyVO">
+		 select user_email, re_write_date, re_star, re_content, re_num, rno from replyReview where re_num = #{re_num}
+	
+	</select>
+</mapper>
