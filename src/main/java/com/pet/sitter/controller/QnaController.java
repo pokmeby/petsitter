@@ -83,8 +83,8 @@ public class QnaController {
 		model.addAttribute("read", qnaService.qnaRead(qnaVO.getQno()));
 		model.addAttribute("scri", scri);
 
-		List<QnaReplyVO> ReplyList = qnaReplyService.readQnaReply(qnaVO.getQno());
-		model.addAttribute("ReplyList", ReplyList);
+		List<QnaReplyVO> replyList = qnaReplyService.readReply(qnaVO.getQno());
+		model.addAttribute("replyList", replyList);
 
 		return "qna/qnaReadView";
 	}
@@ -136,7 +136,7 @@ public class QnaController {
 	public String qnaReplyWrite(QnaReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("qna reply Write");
 
-		qnaReplyService.writeQnaReply(vo);
+		qnaReplyService.writeReply(vo);
 		logger.info("qna reply Writedddddd");
 		rttr.addAttribute("qno", vo.getQno());
 		rttr.addAttribute("page", scri.getPage());
@@ -150,9 +150,10 @@ public class QnaController {
 	//qna 답변 수정 GET
 	@RequestMapping(value="/qnaReplyUpdateView", method = RequestMethod.GET)
 	public String qnaReplyUpdateView(QnaReplyVO vo, SearchCriteria scri, Model model) throws Exception {
-		logger.info("qna reply dpdate get");
+		logger.info("qna reply update get");
+		System.out.println(vo);
 
-		model.addAttribute("replyUpdate", qnaReplyService.selectQnaReply(vo.getQna_rno()));
+		model.addAttribute("replyUpdate", qnaReplyService.selectReply(vo.getQna_rno()));
 		model.addAttribute("scri", scri);
 
 		return "qna/qnaReplyUpdateView";
@@ -162,8 +163,9 @@ public class QnaController {
 	@RequestMapping(value="/qnaReplyUpdate", method = RequestMethod.POST)
 	public String qnaReplyUpdate(QnaReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("qna reply update post");
-
-		qnaReplyService.updateQnaReply(vo);
+		System.out.println(vo);
+		qnaReplyService.updateReply(vo);
+		System.out.println(vo);
 
 		rttr.addAttribute("qno", vo.getQno());
 		rttr.addAttribute("page", scri.getPage());
@@ -181,7 +183,7 @@ public class QnaController {
 	public String qnaReplyDeleteView(QnaReplyVO vo, SearchCriteria scri, Model model) throws Exception {
 		logger.info("qna reply delete");
 
-		model.addAttribute("replyDelete", qnaReplyService.selectQnaReply(vo.getQna_rno()));
+		model.addAttribute("replyDelete", qnaReplyService.selectReply(vo.getQna_rno()));
 		model.addAttribute("scri", scri);
 
 		return "qna/qnaReplyDeleteView";
@@ -192,7 +194,7 @@ public class QnaController {
 	public String qnaReplyDelete(QnaReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		logger.info("qna reply delete");
 
-		qnaReplyService.deleteQnaReply(vo);
+		qnaReplyService.deleteReply(vo);
 
 		rttr.addAttribute("qno", vo.getQno());
 		rttr.addAttribute("page", scri.getPage());

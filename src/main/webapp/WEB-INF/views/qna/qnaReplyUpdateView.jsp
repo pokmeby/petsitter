@@ -13,7 +13,7 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
-		car formObj = $("form[name='updateForm']");
+		var formObj = $("form[name='updateForm']");
 
 		$(".cancel_btn").on("click", function(){
 			location.href = "/qna/qnaReadView?qno=${replyUpdate.qno}"
@@ -44,8 +44,8 @@
 				<tbody>
 					<tr>
 						<td>
-							<label for="qna_content">댓글 내용</label>
-							<input type="text" id="qna_content" name="qna_content" value="${replyUpdate.qna_content}"/>
+							<label for="qna_reply_content">댓글 내용</label>
+							<input type="text" id="qna_reply_content" name="qna_reply_content" value="${replyUpdate.qna_reply_content}"/>
 						</td>
 					</tr>
 				</tbody>

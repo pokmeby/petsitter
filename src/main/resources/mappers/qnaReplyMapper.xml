@@ -2,16 +2,16 @@
 <!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    <mapper namespace="qnaReplyMapper">
+    <mapper namespace="replyMapper">
     	<!--  댓글 조회 -->
     	<select id="readReply" resultType="com.pet.sitter.vo.QnaReplyVO">
-    		SELECT qna_rno qna_reply_content, sitter_image, sitter_email, qna_reply_date
+    		SELECT *
     		FROM qnaReply
     		WHERE qno = #{qno}
     	</select>
     	
     	<!--  댓글 작성 -->
-    	<insert id="writeQnaReply">
+    	<insert id="writeReply">
     		INSERT INTO qnaReply(qno, qna_rno, qna_reply_content, sitter_image, sitter_email)
     					VALUES(#{qno}, SEQ_QNAREPLY_RNO.nextval, #{qna_reply_content}, #{sitter_image},
     							#{sitter_email})
@@ -31,7 +31,7 @@
 		
 		<!-- 선택된 댓글 조회 -->
 		<select id="selectReply" resultType="com.pet.sitter.vo.QnaReplyVO">
-			SELECT qna_rno qna_reply_content, sitter_image, sitter_email, qna_reply_date
+			SELECT qno, qna_rno, qna_reply_content, sitter_image, sitter_email, qna_reply_date
 			FROM qnaReply
 			WHERE qna_rno = #{qna_rno}
 		</select>

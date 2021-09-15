@@ -39,7 +39,7 @@
 	<header>
 		<h1> 게시판 글쓰기</h1>
 	</header>
-	<hr size="5" color="red"/>
+	<hr />
 	
 	<section id="container">
 		<form name="writeForm" method="post" action="/qna/qnaWrite">

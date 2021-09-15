@@ -11,40 +11,40 @@ import com.pet.sitter.vo.QnaReplyVO;
 
 @Service
 public class QnaReplyServiceImpl implements QnaReplyService{
-
+	
 	@Inject
 	private QnaReplyDAO dao;
 
 	//qna 답변 목록
 	@Override
-	public List<QnaReplyVO> readQnaReply(int qno) throws Exception {
-		return dao.readQnaReply(qno);
+	public List<QnaReplyVO> readReply(int qno) throws Exception {
+		return dao.readReply(qno);
 	}
 
 	//qna 답변 작성
 	@Override
-	public void writeQnaReply(QnaReplyVO vo) throws Exception {
-		System.out.println("vo출력" + vo);
-		dao.writeQnaReply(vo);
+	public void writeReply(QnaReplyVO vo) throws Exception {
+		dao.writeReply(vo);
 	}
 
 	//qna 답변 수정
 	@Override
-	public void updateQnaReply(QnaReplyVO vo) throws Exception {
-		dao.updateQnaReply(vo);
+	public void updateReply(QnaReplyVO vo) throws Exception {
+		dao.updateReply(vo);
 	}
 
 	//qna 답변 삭제
 	@Override
-	public void deleteQnaReply(QnaReplyVO vo) throws Exception {
-		dao.deleteQnaReply(vo);
+	public void deleteReply(QnaReplyVO vo) throws Exception {
+		dao.deleteReply(vo);
 	}
-	
+
 	//선택된 qna 답변 조회
 	@Override
-	public QnaReplyVO selectQnaReply(int qna_rno) throws Exception {
-		return dao.selectQnaReply(qna_rno);
+	public QnaReplyVO selectReply(int qna_rno) throws Exception {
+		return dao.selectReply(qna_rno);
 	}
 	
 	
+
 }

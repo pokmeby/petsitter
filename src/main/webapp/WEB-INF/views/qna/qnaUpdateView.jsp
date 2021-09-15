@@ -56,10 +56,7 @@
 			<h1> qna 수정</h1>
 		</header>
 		<hr>
-		
-	
-		<hr>
-		
+
 		<section id="container">
 			<form name="updateForm" role="form" method="post" action="/qna/qnaUpdate">
 				<input type="hidden" name="qno" value="${update.qno}" readonly="readonly"/>
@@ -103,6 +100,7 @@
 						</tr>	
 					</tbody>
 				</table>
+				<hr>
 				<div>
 					<button type="submit" class="update_btn">저장</button>
 					<button type="button" class="cancel_btn">취소</button>

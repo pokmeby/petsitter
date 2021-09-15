@@ -46,7 +46,7 @@
 			});
 		//댓글 수정 view
 		$(".replyUpdateBtn").on("click", function(){
-			location.href="/qna/replyQnaUpdateView?qno=${read.qno}" 
+			location.href="/qna/qnaReplyUpdateView?qno=${read.qno}" 
 						 + "&page=${scri.page}"
 						 + "&perPageNum=${scri.perPageNum}"
 						 + "&searchType=${srci.searchType}"
@@ -56,7 +56,7 @@
 
 		//댓글 삭제 view
 		$(".replyDeleteBtn").on("click",function(){
-			location.href="/qna/replyQnaDeleteView?qno=${read.qno}" 
+			location.href="/qna/qnaReplyDeleteView?qno=${read.qno}" 
 				 + "&page=${scri.page}"
 				 + "&perPageNum=${scri.perPageNum}"
 				 + "&searchType=${srci.searchType}"
@@ -109,7 +109,7 @@
 			<button type="button" class="delete_btn">삭제</button>
 			<button type="button" class="list_btn">목록</button>
 		</div>
-		
+		<hr/>
 		<!-- 댓글 -->
 		<div id="reply">
 			<ol class="replyList">
@@ -129,7 +129,7 @@
 				</c:forEach>
 			</ol>
 		</div>
-		
+		<hr/>
 		<form name="replyForm" method="post">
 			<input type="hidden" id="qno" name="qno" value="${read.qno}"/>
 			<input type="hidden" id="page" name="page" value="${scri.page}">
