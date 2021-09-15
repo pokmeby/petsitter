@@ -10,7 +10,7 @@
 <h1>
 	Hello world!  
 </h1>
-
+<a href="/sitter/profileBoard">시터프로필</a>
 <P>  The time on the server is ${serverTime}. </P>
 
 <a href="/qna/qnaMain">q&a</a>

@@ -1,12 +1,4 @@
 
-/* Drop Triggers */
-
-DROP TRIGGER TRI_message_mno;
-DROP TRIGGER TRI_qna_qno;
-DROP TRIGGER TRI_reviewBoard_rno;
-DROP TRIGGER TRI_userBoard_board_bno;
-
-
 
 /* Drop Tables */
 
@@ -115,6 +107,7 @@ CREATE TABLE sitterBoard
 (
 	sitter_exp varchar2(1000),
 	sitter_intro varchar2(4000),
+	sitter_addr varchar2(50),
 	sitter_avail date,
 	sitter_price number,
 	sitter_image varchar2(50),
@@ -217,7 +210,36 @@ ALTER TABLE userBoard
 
 
 
--- 제약조건 삭제
-ALTER TABLE '테이블명' DROP CONSTRAINT '제약조건명';
+
+// 9/14 추가
+
+create table blog(
+    blog_bno number,
+    blog_date date,
+    blog_title varchar2(200),blog_content varchar2(3000),
+    blog_image varchar2(50),
+    blog_email varchar2(30),
+    primary key (blog_bno));
+
+
+
+create table blogreply(
+blog_no number,
+reply_no number,
+reply_content varchar2(1000),
+reply_writer varchar2(50),
+reply_date date
+);
+
+
+alter table blogreply
+add foreign key(blog_no) 
+references blog(blog_bno);
+
+
+create sequence seq_blog_bno;
+create sequence seq_blog_reply;
+
+
 
 
