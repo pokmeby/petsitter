@@ -22,8 +22,7 @@
 		<section id="container">
 			<form role="form" method="get">
 			
-				
-				
+			
 				<div>
 					
 							<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
@@ -70,14 +69,9 @@
 			</ol>
 		</div>
 		
-		
-		
-		
-		
-		
-		
+
 				 <div>
-					<div>
+					<%-- <div>
 						<select name="searchType">
 							<option value="n" <c:out value="${srci.searchType == null ? 'selected' : '' }"/>>-----</option>
 							<option value="t" <c:out value="${srci.searchType eq 't' ? 'selected' : '' }"/>>제목</option>
@@ -86,9 +80,13 @@
 							<option value="w" <c:out value="${srci.searchType eq 'w' ? 'selected' : '' }"/>>작성자</option>
 							<option value="tc" <c:out value="${srci.searchType eq 'tc' ? 'selected' : '' }"/>>제목+내용</option>
 						</select>
+					</div> --%>
+					<div>
+						<select name="searchType">
+							<option value="all" <c:out value="${srci.searchType eq 'all' ? 'selected' : '' }"/>>전체</option>
+						</select>
 					</div>
-					
-					
+
 					
 					<script>
 	$(function(){

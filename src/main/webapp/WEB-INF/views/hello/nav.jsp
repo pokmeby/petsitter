@@ -34,19 +34,19 @@
       
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active size" aria-current="page" href="#">소개</a>
+          <a class="nav-link active size" aria-current="page" href="">소개</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link " href="#">씨터소개</a>
+          <a class="nav-link " href="/sitter/profileBoard">씨터소개</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="review/boardReview">후기</a>
+          <a class="nav-link" href="/review/boardReview">후기</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="qna/qnaMain">Q&A</a>
+          <a class="nav-link" href="/qna/qnaMain">Q&A</a>
         </li>
         
         <li class="nav-item">
@@ -66,7 +66,7 @@
         </li>        
         
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                회원가입
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -105,13 +105,13 @@
 			<c:choose>
 					<c:when test="${sessionScope.member eq 'admin@naver.com'}">
 						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							class="nav-link dropdown-toggle" href="" id="navbarDropdown"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								로그아웃 </a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							class="nav-link dropdown-toggle" href="" id="navbarDropdown"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								로그인 </a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
