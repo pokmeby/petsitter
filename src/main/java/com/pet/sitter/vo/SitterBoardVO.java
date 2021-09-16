@@ -47,8 +47,8 @@ public class SitterBoardVO {
 		this.sitter_gender = sitter_gender;
 	}
 	
-	public int getRate() {
-		return (int)rate;
+	public double getRate() {
+		return (double)rate;
 	}
 	public String getSitter_exp() {
 		return sitter_exp;

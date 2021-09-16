@@ -12,13 +12,13 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	var fromObj = $("form[name='readForm']");
+	var formObj = $("form[name='readForm']");
 
 	$(".write_btn").on("click", function() {
 
 			formObj.attr("action", "/review/writeReview");
 			formObj.attr("method", "get");
-			fromObj.submit();
+			formObj.submit();
 	})
 })
 </script>
@@ -27,13 +27,11 @@ $(document).ready(function() {
 	  <div>
          <%@include file="nav.jsp" %>
        </div>
-	
-	<div>
-		<a href="/review/writeReview">글 작성</a>
-	</div>
-
+		<c:if test = "${member != null}">
+		<button type ="button" class="write_btn">글 작성</button>
+		</c:if>
 	<section>
-		<form role="form" method="get">
+		<form role="form" method="get" name ="readForm">
 	<div>
 		<div>
 			<select name="searchType">

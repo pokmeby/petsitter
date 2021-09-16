@@ -85,16 +85,29 @@ CREATE TABLE qna
 
 CREATE TABLE reviewBoard
 (
-	r_rate number,
-	r_title varchar2(30),
-	rwrite_date date default sysdate,
-	ruse_date varchar2(50),
-	rno number NOT NULL,
-	r_content varchar2(3000),
-	user_email varchar2(30) NOT NULL,
-	sitter_email varchar2(30) NOT NULL,
-	PRIMARY KEY (rno)
+   r_rate number,
+   r_title varchar2(30),
+   rwrite_date date default sysdate,
+   ruse_date varchar2(40),
+   rno number NOT NULL,
+   r_content varchar2(3000),
+   user_email varchar2(30) NOT NULL,
+   sitter_email varchar2(30) NOT NULL,
+   r_image varchar2(250),
+   PRIMARY KEY (rno)
 );
+
+CREATE TABLE replyReview
+(
+   user_email varchar2(30) NOT NULL,
+   re_write_date date default sysdate,
+   re_star number not null,
+   re_content varchar2(3000) not null,
+   re_num number not null,
+   rno number not null,
+   PRIMARY KEY(rno, re_num)
+);
+
 
 
 CREATE TABLE sitterBoard
@@ -203,5 +216,5 @@ ALTER TABLE userBoard
 
 
 
-
+CREATE SEQUENCE SEQ_replyReview_reno INCREMENT BY 1 START WITH 1;
 

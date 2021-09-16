@@ -13,14 +13,16 @@
                  #{sitter_email}, #{sitter_password}, #{sitter_name}, #{sitter_phone}, #{sitter_gender}
         )
       </insert>
+      
       <insert id="sitterInfo" >
       insert into sitterboard (sitter_exp, sitter_intro, sitter_addr, sitter_avail, sitter_price, sitter_image, sitter_email)
       values('경력을 작성해주세요','소개를 입력해주세요','korea',sysdate,0,'null',#{sitter_email})
       </insert>
       
-      <select id="sitterLogin" resultType="com.pet.sitter.vo.SitterVO">
       
-        select sitter_email , sitter_password from sittermember where sitter_email = #{sitter_email} and sitter_password = #{sitter_password}
+      <select id="sitterLogin" parameterType="com.pet.sitter.vo.SitterVO" resultType="com.pet.sitter.vo.SitterVO">
+      
+        select sitter_email , sitter_password from sitterMember where sitter_email = #{sitter_email} and sitter_password = #{sitter_password}
       
       </select>
       

@@ -71,7 +71,8 @@ function click_add(){
 </div>
 <div>
 <label for="rate">별점</label>
-<input type="text" id="rate" name="rate" value="${profileView.rate}" readonly/>
+	<fmt:formatNumber value="${profileView.rate }" pattern=".0"/>
+ <!--  <input type="text" id="rate" name="rate" value="${profileView.rate}" readonly/> -->
 </div>
 <div>
 <c:if test="${profileView.sitter_email eq sessionScope.sitter}">

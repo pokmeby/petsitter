@@ -70,13 +70,16 @@ $(document).ready(function() {
 			
 			<div>
 			<label for="sitter_email">시터 아이디</label>
-			<input type="text" id="sitter_email" name="sitter_email"/>
+			<input type="email" id="sitter_email" name="sitter_email"/>
 			</div>
-
+			
+			<input type="hidden" id="user_email" name="user_email" value="${member}">
+			<!-- 
 			<div>
 			<label for="user_email">사용자 아이디</label>
 			<input type="text" id="user_email" name="user_email"/>
 			</div>
+			 -->
 			<div><button class="write_btn" type="submit">작성하기</button></div>
 		</div>
 		</form>

@@ -32,28 +32,37 @@ public class PetInfoController {
 	
 
 	
-	// 프로필 쓰기
-	@RequestMapping(value="/petinfoForm" , method = RequestMethod.GET)
-	public void infoWriteView()throws Exception
+	// write petinfo page
+	@RequestMapping(value="/writePetInfo" , method = RequestMethod.GET)
+	public void infoWriteView() throws Exception
 	{
-		logger.info("pet info write GET 실행");
-							
+		logger.info("펫 정보 작성 페이지 성공");
+		
 	}
 	
-	// 프로필 쓰기
+	// write petinfo page post
 	@RequestMapping(value="/infowrite" , method = RequestMethod.POST)
 	public String infoWrite(PetInfoVO pvo)throws Exception
 	{
-		logger.info("pet info write POST 실행");
+		logger.info("펫 정보 입력 성공 post");
 		System.out.println("petinfo 들어간 값" + pvo.getPet_type());
 		pservice.infoWrite(pvo);
 		
-		return "home";
+		return "redirect:/";
 						
 	}
 	
+	// petinfo page
+	@RequestMapping(value="/petInfo", method = RequestMethod.GET)
+	public String petInfo(PetInfoVO petVO) throws Exception {
+		
+		logger.info("펫 정보 페이지 성공");
+		
+		return "petinfo/petInfo";
+	}
+	
 	// 펫 정보 수정
-	@RequestMapping(value="/petinfoUpdateForm" , method =RequestMethod.GET)
+	@RequestMapping(value="/updatePetInfo" , method =RequestMethod.GET)
 	public String petinfoUpdate(PetInfoVO Petvo,HttpSession session, @ModelAttribute("scri") SearchCriteria scri, Model model)throws Exception {
 		
 		String id = (String)session.getAttribute("member");
@@ -67,7 +76,7 @@ public class PetInfoController {
 		
 		logger.info("펫 정보 수정 페이지 접속 ");
 		
-		return "petinfo/petinfoUpdateForm";
+		return "petinfo/updatePetInfo";
 	}
 	
 	// 펫 정보 수정 post
@@ -82,7 +91,7 @@ public class PetInfoController {
 		System.out.println("petinfo 들어간 값" + pvo.getPet_type());
 		pservice.infoUpdate(pvo);
 		
-		return "home";
+		return "redirect:/petinfo/petInfo";
 		
 	}
 	

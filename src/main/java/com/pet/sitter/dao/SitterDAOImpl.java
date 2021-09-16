@@ -18,7 +18,7 @@ public class SitterDAOImpl implements SitterDAO{
 	public void sitterRegister(SitterVO svo) throws Exception {
 		// TODO Auto-generated method stub
 		sittersql.insert("sitterMapper.sitterRegister" , svo);
-		sittersql.insert("sitterMapper.sitterInfo",svo);
+		  sittersql.insert("sitterMapper.sitterInfo",svo);
 	}
 
 	@Override

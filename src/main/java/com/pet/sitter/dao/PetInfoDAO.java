@@ -5,7 +5,7 @@ import com.pet.sitter.vo.PetInfoVO;
 public interface PetInfoDAO {
 	
 	
-	//프로필 쓰기
+	    //프로필 쓰기
 		public void infoWrite(PetInfoVO pvo)throws Exception;
 		
 		//프로필 수정

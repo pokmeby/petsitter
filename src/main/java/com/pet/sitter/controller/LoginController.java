@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pet.sitter.service.MemberService;
@@ -46,19 +45,21 @@ public class LoginController {
 		logger.info("post memberlogin 성공");
 		
 		HttpSession session = req.getSession();
-		MemberVO login = Mservice.memberLogin(mvo);
+		MemberVO memberlogin = Mservice.memberLogin(mvo);
 		
-		if(login == null)
+		System.out.println(memberlogin);
+		
+		if(memberlogin == null)
 		{
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("membermsg" , false);
 		}
 		else
 		{
-			session.setAttribute("member", login.getUser_email());
+			session.setAttribute("member", memberlogin.getUser_email());
 		}
 		
-		return "redirect:/blog/list";
+		return "redirect:/";
 		
 	}
 	
@@ -66,7 +67,7 @@ public class LoginController {
 	@RequestMapping(value="/sitterLogin" , method = RequestMethod.GET)
 	public void sitterLogin() throws Exception
 	{
-		logger.info("get sitterlogin 성공");
+		logger.info("get sitterlogin page 접속");
 	}
 	
 	
@@ -74,22 +75,28 @@ public class LoginController {
 	@RequestMapping(value="/sitterLogin" , method = RequestMethod.POST)
 	public String sitterLogin(SitterVO svo , HttpServletRequest req , RedirectAttributes rttr) throws Exception
 	{
-		logger.info("post memberlogin 성공");
+		logger.info("post sitterlogin 성공");
 		
 		HttpSession session = req.getSession();
-		SitterVO login = Sservice.sitterLogin(svo);
+		SitterVO sitterlogin = Sservice.sitterLogin(svo);
 		
-		if(login == null)
+		System.out.println(Sservice.sitterLogin(svo));
+		System.out.println("-----------------");
+		System.out.println(sitterlogin.getSitter_email());
+		System.out.println(svo.getSitter_password());
+		
+		
+		if(sitterlogin.getSitter_email() == null)
 		{
 			session.setAttribute("sitter", null);
 			rttr.addFlashAttribute("sittermsg" , false);
 		}
 		else
 		{
-			session.setAttribute("sitter", svo.getSitter_email());
+			session.setAttribute("sitter", sitterlogin.getSitter_email());
 		}
 		
-		return "home";
+		return "redirect:/";
 		
 	}
 	
@@ -99,9 +106,10 @@ public class LoginController {
 		@RequestMapping(value="/logout" , method = RequestMethod.GET)
 		public String logout(HttpSession session) throws Exception
 		{
+			System.out.println(session);
 			logger.info("로그아웃 성공!!");
 			session.invalidate();
-			
+			System.out.println(session);
 			return "redirect:/";
 		}
 }

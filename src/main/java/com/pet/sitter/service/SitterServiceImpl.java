@@ -22,6 +22,7 @@ public class SitterServiceImpl implements SitterService{
 	@Override
 	public SitterVO sitterLogin(SitterVO svo) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("sitter email is = " + svo.getSitter_email());
 		return sdao.sitterLogin(svo);		
 		
 	}
@@ -37,15 +38,4 @@ public class SitterServiceImpl implements SitterService{
 		// TODO Auto-generated method stub
 		return sdao.sitterPhoneChk(svo);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

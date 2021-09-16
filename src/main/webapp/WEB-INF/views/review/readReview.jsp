@@ -123,8 +123,10 @@
 		
 		<hr size="5" color="red">
 		<div>
+		<c:if test="${ read.user_email eq sessionScope.member}">
 		<button type="button" class="update_btn">글 수정</button>
 		<button type="button" class="delete_btn">글 삭제</button>
+		</c:if>
 		</div>
 		<hr size="5" color="blue">
 		
@@ -138,8 +140,10 @@
 				
 				<p>${replyList.re_content}</p>
 			<div>
+				<c:if test="${replyList.user_email eq sitter || replyList.user_email eq member}">
 				<button type="button" class="replyUpdateBtn" data-re_num="${replyList.re_num}">수정</button>
 				<button type="button" class="replyDeleteBtn" data-re_num="${replyList.re_num}">삭제</button>
+				</c:if>
 			</div>
 				</li>
 			</c:forEach>
@@ -153,9 +157,16 @@
 			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 			
+				<c:if test="${member != null || sitter != null}">
 			<div>
 				<label for="user_email">아이디</label>
-				<input type="text" id="user_email" name="user_email" value="${read.user_email}" /><!-- session 아디 -->
+				<c:if test = "${sitter != null}">
+				<input type="text" id="user_email" name="user_email" value="${sitter}" /><!-- session 아디 -->
+				</c:if>
+				
+				<c:if test ="${member != null }">
+				<input type="text" id="user_email" name="user_email" value="${member}" /><!-- session 아디 -->
+				</c:if>
 			</div>
 			
 			<div>
@@ -166,6 +177,7 @@
 			<div>
 				<button type="button" class="replyWriteBtn">작성</button>
 			</div>
+				</c:if>
 		</form>
 	</section>
 	</div>

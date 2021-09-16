@@ -50,6 +50,7 @@ public class ReviewBoardController {
 	@RequestMapping(value="/writeReview", method=RequestMethod.GET)
 	public void writeReview() throws Exception {
 		logger.info("리뷰 글쓰기 페이지 들어가기 성공");
+		
 	}
 
 	// image Update page 	imageUpdate

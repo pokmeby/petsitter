@@ -98,13 +98,12 @@
 			</div>
 
 			<div>
-			<label for="user_email">사용자</label>
-			<input type="text" id="user_email" name="user_email" value="${update.user_email}"/>
+			<input type="hidden" id="user_email" name="user_email" value="${member}">
 			</div>
 			
 			<div>
 			<label for="sitter_email">시터 아이디</label>
-			<input type="text" id="sitter_email" name="sitter_email" value="${update.sitter_email}"/>
+			<input type="email" id="sitter_email" name="sitter_email" value="${update.sitter_email}"/>
 			</div>
 			<div>
 				<button type="submit" class="update_btn">저장</button>

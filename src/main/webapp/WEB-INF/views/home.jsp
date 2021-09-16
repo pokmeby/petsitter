@@ -15,11 +15,12 @@
 
 <body>
 
-<%@ include file="nav.jsp" %>
+<%@ include file="./hello/nav.jsp" %>
 
 
 <h1>
    Hello world!  
+	<c:out value="${member }"/>
 </h1>
 <a href="/sitter/profileBoard">시터프로필</a>
 <P>  The time on the server is ${serverTime}. </P>

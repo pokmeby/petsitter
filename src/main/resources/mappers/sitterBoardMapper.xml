@@ -12,7 +12,7 @@ WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 
 <select id="profileView" resultType="com.pet.sitter.vo.SitterBoardVO">
 SELECT * FROM 
-SITTERBOARD NATURAL JOIN SITTERMEMBER,(select avg(nvl(r_rate,0)) AS rate from reviewBoard where sitter_email=#{sitter_email}) 
+SITTERBOARD NATURAL JOIN SITTERMEMBER,(select trunc(avg(nvl(r_rate,0)),1) AS rate from reviewBoard where sitter_email=#{sitter_email}) 
 WHERE SITTER_EMAIL = #{sitter_email}
 </select>
 
