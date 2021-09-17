@@ -1,0 +1,198 @@
+
+
+/* Drop Tables */
+
+DROP TABLE message CASCADE CONSTRAINTS;
+DROP TABLE petInfo CASCADE CONSTRAINTS;
+DROP TABLE qna CASCADE CONSTRAINTS;
+DROP TABLE reviewBoard CASCADE CONSTRAINTS;
+DROP TABLE sitterBoard CASCADE CONSTRAINTS;
+DROP TABLE sitterMember CASCADE CONSTRAINTS;
+DROP TABLE userBoard CASCADE CONSTRAINTS;
+DROP TABLE UserMember CASCADE CONSTRAINTS;
+
+
+
+/* Drop Sequences */
+
+DROP SEQUENCE SEQ_message_mno;
+DROP SEQUENCE SEQ_qna_qno;
+DROP SEQUENCE SEQ_reviewBoard_rno;
+DROP SEQUENCE SEQ_userBoard_board_bno;
+
+
+
+
+/* Create Sequences */
+
+CREATE SEQUENCE SEQ_message_mno INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_qna_qno INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_reviewBoard_rno INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_userBoard_board_bno INCREMENT BY 1 START WITH 1;
+
+
+
+/* Create Tables */
+
+CREATE TABLE message
+(
+	send varchar2(30),
+	recieve varchar2(30),
+	m_time date,
+	m_content varchar2(1000),
+	mno number NOT NULL,
+	user_email varchar2(30) NOT NULL,
+	sitter_email varchar2(30) NOT NULL,
+	PRIMARY KEY (mno)
+);
+
+
+CREATE TABLE petInfo
+(
+	pet_type varchar2(30),
+	pet_age number,
+	pet_gender varchar2(6),
+	pet_detail varchar2(1000),
+	pet_name varchar2(50),
+	pet_image varchar2(100),
+	user_email varchar2(30) NOT NULL
+);
+
+
+CREATE TABLE qna
+(
+	qa_title varchar2(100),
+	qa_content varchar2(3000),
+	qa_date date,
+	a_image varchar2(100),
+	a_content varchar2(3000),
+	q_category varchar2(50),
+	qno number NOT NULL,
+	user_email varchar2(30) NOT NULL,
+	sitter_email varchar2(30) NOT NULL,
+	PRIMARY KEY (qno)
+);
+
+
+CREATE TABLE reviewBoard
+(
+	r_rate number,
+	r_title varchar2(30),
+	rwrite_date date,
+	ruse_date date,
+	rno number NOT NULL,
+	r_content varchar2(3000),
+	user_email varchar2(30) NOT NULL,
+	sitter_email varchar2(30) NOT NULL,
+	PRIMARY KEY (rno)
+);
+
+
+CREATE TABLE sitterBoard
+(
+	sitter_exp varchar2(1000),
+	sitter_intro varchar2(4000),
+	sitter_addr varchar2(50),
+	sitter_avail date,
+	sitter_price number,
+	sitter_image varchar2(50),
+	sitter_email varchar2(30) NOT NULL
+);
+
+
+CREATE TABLE sitterMember
+(
+	sitter_email varchar2(30) NOT NULL,
+	sitter_name varchar2(20) NOT NULL,
+	sitter_password varchar2(30) NOT NULL,
+	sitter_phone varchar2(20) NOT NULL,
+	sitter_gender varchar2(6) NOT NULL,
+	PRIMARY KEY (sitter_email)
+);
+
+
+CREATE TABLE userBoard
+(
+	board_date date,
+	board_title varchar2(200),
+	board_content varchar2(3000),
+	board_loc varchar2(50),
+	board_avail date,
+	board_bno number NOT NULL,
+	board_image varchar2(50),
+	user_email varchar2(30) NOT NULL,
+	PRIMARY KEY (board_bno)
+);
+
+
+CREATE TABLE UserMember
+(
+	user_email varchar2(30) NOT NULL,
+	user_password varchar2(20) NOT NULL,
+	user_name varchar2(20) NOT NULL,
+	user_phone varchar2(20) NOT NULL,
+	user_gender varchar2(6) NOT NULL,
+	PRIMARY KEY (user_email)
+);
+
+
+
+/* Create Foreign Keys */
+
+ALTER TABLE message
+	ADD FOREIGN KEY (sitter_email)
+	REFERENCES sitterMember (sitter_email)
+;
+
+
+ALTER TABLE qna
+	ADD FOREIGN KEY (sitter_email)
+	REFERENCES sitterMember (sitter_email)
+;
+
+
+ALTER TABLE reviewBoard
+	ADD FOREIGN KEY (sitter_email)
+	REFERENCES sitterMember (sitter_email)
+;
+
+
+ALTER TABLE sitterBoard
+	ADD FOREIGN KEY (sitter_email)
+	REFERENCES sitterMember (sitter_email)
+;
+
+
+ALTER TABLE message
+	ADD FOREIGN KEY (user_email)
+	REFERENCES UserMember (user_email)
+;
+
+
+ALTER TABLE petInfo
+	ADD FOREIGN KEY (user_email)
+	REFERENCES UserMember (user_email)
+;
+
+
+ALTER TABLE qna
+	ADD FOREIGN KEY (user_email)
+	REFERENCES UserMember (user_email)
+;
+
+
+ALTER TABLE reviewBoard
+	ADD FOREIGN KEY (user_email)
+	REFERENCES UserMember (user_email)
+;
+
+
+ALTER TABLE userBoard
+	ADD FOREIGN KEY (user_email)
+	REFERENCES UserMember (user_email)
+;
+
+
+
+
+
